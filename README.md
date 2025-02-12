@@ -1,16 +1,31 @@
-# weather
+# Weather App 🌦️
 
-A new Flutter project.
+A simple Flutter weather app that provides real-time weather updates based on the user's location. The app also allows users to search for weather conditions in different cities. and to access the the weather data based on their location.
 
-## Getting Started
+## ✨ Features
 
-This project is a starting point for a Flutter application.
+🌍 Geolocation Support – detects the user’s location for weather updates.
+🔍 Search Functionality – Users can search for weather in different cities.
+📦 State Management – Uses Riverpod for efficient state management.
+💾 Local Storage – Uses Hive for storing cached weather data.
+🌐 Network Requests – Uses Dio for making API calls efficiently.
+🖼️ Image Caching – Uses cached_network_image for optimized image loading.
+🎭 Animations – Uses Lottie for smooth animations based on weather conditions.
 
-A few resources to get you started if this is your first Flutter project:
+## Permissions Required
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+When the app prompts for location access, grant permission to allow it to fetch weather data based on your current location.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The app uses Geolocator to fetch the device’s coordinates.
+
+### How to Run the App Locally
+
+1. Clone the repository
+   git clone https://github.com/johannesalemu01/WeatherApp
+   cd weather
+
+   2.install dependecies
+   on the terminal write flutter pub get
+
+2. Run the app
+   flutter run
