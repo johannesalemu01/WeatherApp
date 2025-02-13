@@ -22,9 +22,33 @@ class _LocationSelectionScreenState
   }
 
   void _addLocationAndRedirect(String city) {
-    final locationNotifier = ref.read(locationListProvider.notifier);
-    locationNotifier.addLocation(city);
-    Navigator.pop(context, city);
+    try {
+      final locationNotifier = ref.read(locationListProvider.notifier);
+      locationNotifier.addLocation(city);
+      Navigator.pop(context, city);
+    } catch (e) {
+      _showErrorDialog("Failed to add location: $e");
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -94,11 +118,15 @@ class _LocationSelectionScreenState
                   return GestureDetector(
                     onTap: () {
                       if (isSaved) {
-                        ref.read(selectedCityProvider.notifier).state = city;
-                        ref
-                            .read(locationListProvider.notifier)
-                            .removeLocation(city);
-                        _addLocationAndRedirect(city);
+                        try {
+                          ref.read(selectedCityProvider.notifier).state = city;
+                          ref
+                              .read(locationListProvider.notifier)
+                              .removeLocation(city);
+                          _addLocationAndRedirect(city);
+                        } catch (e) {
+                          _showErrorDialog("Failed to select location: $e");
+                        }
                       } else {
                         _addLocationAndRedirect(city);
                       }
@@ -110,9 +138,16 @@ class _LocationSelectionScreenState
                             style: const TextStyle(color: Colors.white)),
                         trailing: isSaved
                             ? InkWell(
-                                onTap: () => ref
-                                    .read(locationListProvider.notifier)
-                                    .removeLocation(city),
+                                onTap: () {
+                                  try {
+                                    ref
+                                        .read(locationListProvider.notifier)
+                                        .removeLocation(city);
+                                  } catch (e) {
+                                    _showErrorDialog(
+                                        "Failed to remove location: $e");
+                                  }
+                                },
                                 child: const Icon(Icons.remove,
                                     color: Colors.green),
                               )

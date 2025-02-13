@@ -44,6 +44,7 @@ dependencies:
   path_provider: ^2.1.5
   intl: ^0.20.2
   cached_network_image: ^3.4.1
+  flutter_native_splash: ^2.4.4
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,15 @@ flutter:
     - assets/images/cloudy.jpg
     - assets/images/sunny.jpg
     - assets/images/rainy.jpg
+
+flutter_native_splash:
+  color: "#ffffff" # Background color of the splash screen
+  image: assets/images/splash_image.jpg # Path to the splash image
+  android: true
+  ios: true
+  web: true # Optional for web
+  fullscreen: true # Optional for fullscreen splash screen
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -13,10 +13,10 @@ class Constants {
     ],
   );
 
-  String getBackgroundImage(int temp) {
-    if (temp < 10) {
+  String getBackgroundImage(int condition) {
+    if (condition < 10) {
       return 'assets/images/rainy.jpg';
-    } else if (temp >= 10 && temp < 25) {
+    } else if (condition > 10 && condition < 25) {
       return 'assets/images/cloudy.jpg';
     } else {
       return 'assets/images/sunny.jpg';

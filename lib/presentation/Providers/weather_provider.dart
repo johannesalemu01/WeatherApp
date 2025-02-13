@@ -7,18 +7,20 @@ final locationProvider = FutureProvider<Position>((ref) async {
   return await LocationService.getCurrentLocation();
 });
 
-final selectedCityProvider = StateProvider<String>((ref) => 'Bahir dar');
+final selectedCityProvider = StateProvider<String>((ref) => 'Bahir Dar');
 
 final weatherProvider = FutureProvider<Map<String, dynamic>>((ref) async {
   final selectedCity = ref.watch(selectedCityProvider);
+  Map<String, dynamic> weatherData;
 
   if (selectedCity.isEmpty) {
     final location = await ref.watch(locationProvider.future);
-    return await WeatherService()
+    weatherData = await WeatherService()
         .fetchWeatherByLocation(location.latitude, location.longitude);
   } else {
-    return await WeatherService().fetchWeatherByCity(selectedCity);
+    weatherData = await WeatherService().fetchWeatherByCity(selectedCity);
   }
+  return weatherData;
 });
 
 final forecastProvider = FutureProvider<Map<String, dynamic>>((ref) async {
